@@ -1,17 +1,21 @@
-let Data = require('./Data.json');
 const express = require('express');
+const config = require('./config.js');
+const router = require('./router.js');
 const app = express();
 
-const PORT = 4000;
+app.use(express.json());
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
-app.get('/tasks/', (req, res) => {
-    res.set({
-        "Access-Control-Allow-Origin": "*",
-    });
-    res.send(Data);
+app.use(config.url, router);
 
-})
 
+const PORT = config.PORT;
 app.listen(PORT, () => {
     console.log(`Server is listening port ${PORT}`)
 })
