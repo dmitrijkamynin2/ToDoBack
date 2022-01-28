@@ -16,8 +16,6 @@ router
         res.sendStatus(200);
     })
     .post((req, res) => {
-        // res.set({"Access-Control-Allow-Origin" : "*"}).send();
-        res.send('11111');
         postTasks(req);
         res.sendStatus(201);
     })
