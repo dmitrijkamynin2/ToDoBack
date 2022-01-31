@@ -15,7 +15,6 @@ class Tasks {
         }
         return oldTask
     }
-    
 }
 
 module.exports = new Tasks();
