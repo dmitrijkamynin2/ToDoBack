@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.2",
+    "express-recursive-routes": "^2.1.2",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

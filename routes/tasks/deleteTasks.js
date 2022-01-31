@@ -1,8 +1,12 @@
-let Data = require('../../Data.js')
+const router = require('express').Router()
+const Tasks = require('../../model/Tasks.js')
 
-const deleteTasks = (req) => {
-    console.log(req.query.id);
-    Data.tasks = Data.tasks.filter((task) => task.id != req.query.id);
-}
+router.route('/tasks').delete(async (req, res) => {
+    let oldTasks = await Tasks.getTasks();
+    newTasks = {}
+    newTasks.tasks = oldTasks.tasks.filter(task => task.id != req.query.id);
+    await Tasks.saveTasks(newTasks);
+    res.sendStatus(202);
+})
 
-module.exports = deleteTasks
+module.exports = router;

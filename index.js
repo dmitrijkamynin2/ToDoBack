@@ -1,7 +1,7 @@
 const express = require('express');
 const config = require('./config.js');
-const router = require('./router.js');
 const app = express();
+var fs = require('fs');
 
 app.use(express.json());
 app.use(function (req, res, next) {
@@ -12,8 +12,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use(config.url, router);
-
+const routes = fs.readdirSync('./routes/tasks');
+routes.forEach(route => {app.use('/api', require('./routes/tasks/'+route))});
 
 const PORT = config.PORT;
 app.listen(PORT, () => {
