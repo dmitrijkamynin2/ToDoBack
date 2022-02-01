@@ -1,6 +1,4 @@
-const express = require('express');
 const { query, body, validationResult } = require('express-validator');
-const { checkTask } = require('../model/Tasks.js');
 const routerValid = require('express').Router()
 const Tasks = require('../model/Tasks.js')
 

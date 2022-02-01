@@ -18,7 +18,7 @@ app.use('/api', routerValid);
 const routes = fs.readdirSync('./routes/tasks');
 routes.forEach(route => {app.use('/api', require('./routes/tasks/'+route))});
 
-const PORT = config.PORT;
+const PORT = process.env.PORT || config.PORT;
 app.listen(PORT, () => {
     console.log(`Server is listening port ${PORT}`)
 })

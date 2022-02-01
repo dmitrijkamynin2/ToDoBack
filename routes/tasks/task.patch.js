@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const { checkTask } = require('../../model/Tasks.js');
 const Tasks = require('../../model/Tasks.js')
 
 router.route('/tasks').patch(async (req, res) => {
@@ -20,7 +19,6 @@ router.route('/tasks').patch(async (req, res) => {
         }
     } catch (err) {
         res.status(401).send(err);
-        // res.send(err);
     }
 
 })
