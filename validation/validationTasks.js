@@ -1,5 +1,5 @@
 const express = require('express');
-const { body, validationResult } = require('express-validator');
+const { query, body, validationResult } = require('express-validator');
 const { checkTask } = require('../model/Tasks.js');
 const routerValid = require('express').Router()
 const Tasks = require('../model/Tasks.js')
@@ -45,6 +45,47 @@ routerValid.route('/tasks')
                 }
                 });
             }),
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+            next();
+        }
+    ).delete(
+        query('id')
+            .isUUID()
+            .custom(value => {
+                return Tasks.checkTaskId(value).then(task => {
+                if (task.length === 0) {
+                    return Promise.reject('not task with this id');
+                }
+                });
+            }),
+        (req, res, next) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({ errors: errors.array() });
+            }
+            next();
+        }
+    ).get(
+        query('filterBy').isIn(['all','done','undone']),
+        query('order').isIn(['asc','desc']),
+        query('pp').custom(value => {
+            if (value >= 5 && value <= 20) {
+                return true
+            } else {
+                return Promise.reject('invalid range');
+            }
+        }),
+        query('page').isNumeric().bail().custom(value => {
+            if (value > 0) {
+                return true
+            } else {
+                return Promise.reject('invalid page');
+            }
+        }),
         (req, res, next) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
