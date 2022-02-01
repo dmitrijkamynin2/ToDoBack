@@ -19,8 +19,13 @@ class Tasks {
     checkTask = async function (name) {
         const checkingTasks = await this.getTasks();
         const result = checkingTasks.tasks.find((task => task.name === name));
-        // console.log(checkingTasks);
-        return result; 
+        return result;
+    }
+
+    checkTaskId = async function (id) {
+        const checkingTasks = await this.getTasks();
+        const result = checkingTasks.tasks.filter((task => task.id === id));
+        return result;
     }
 
 }
