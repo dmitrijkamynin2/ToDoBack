@@ -15,6 +15,14 @@ class Tasks {
         }
         return oldTask
     }
+
+    checkTask = async function (name) {
+        const checkingTasks = await this.getTasks();
+        const result = checkingTasks.tasks.find((task => task.name === name));
+        // console.log(checkingTasks);
+        return result; 
+    }
+
 }
 
 module.exports = new Tasks();
