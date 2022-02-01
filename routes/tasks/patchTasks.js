@@ -6,8 +6,6 @@ router.route('/tasks').patch(async (req, res) => {
     try {
         let oldTasks = await Tasks.getTasks();
         const checkOldTasks = oldTasks.tasks.filter(task => task.name === req.body.name);
-        console.log(typeof checkOldTasks[0].id);
-        console.log(typeof req.body.id);
         if ((checkOldTasks.length == 0) || (checkOldTasks[0].id === req.body.id)) {
             oldTasks.tasks.forEach((task) => {
                     if (task.id == req.body.id) {
@@ -18,11 +16,11 @@ router.route('/tasks').patch(async (req, res) => {
             await Tasks.saveTasks(oldTasks);
             res.sendStatus(202);
         } else {
-            throw new ValidationError();
+            throw new Error('this name tasks already in use');
         }
     } catch (err) {
-        res.status(401);
-        res.send(err);
+        res.status(401).send(err);
+        // res.send(err);
     }
 
 })
