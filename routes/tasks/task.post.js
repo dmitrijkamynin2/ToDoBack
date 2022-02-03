@@ -1,15 +1,15 @@
 const router = require('express').Router()
-const Tasks = require('../../model/Tasks.js')
-const { v4 } = require('uuid');
+const Task = require('../../db.js');
 
 router.route('/tasks').post(async (req, res) => {
-    let oldTasks = await Tasks.getTasks();
-    newTask = req.body;
-    newTask.id = v4();
-    oldTasks.tasks.push(newTask);
-    await Tasks.saveTasks(oldTasks);
-    res.status(201);
-    res.send(newTask);
+    try{
+        await Task.create({name: req.body.name, done: req.body.done});
+        newTask = req.body;
+        res.status(201);
+        res.send(newTask);  
+    } catch (err) {
+        res.status(400).send(err);
+    }
 })
 
 module.exports = router;

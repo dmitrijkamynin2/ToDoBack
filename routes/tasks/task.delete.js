@@ -1,12 +1,17 @@
 const router = require('express').Router()
-const Tasks = require('../../model/Tasks.js')
+const Task = require('../../db.js');
 
 router.route('/tasks').delete(async (req, res) => {
-    let oldTasks = await Tasks.getTasks();
-    newTasks = {}
-    newTasks.tasks = oldTasks.tasks.filter(task => task.id != req.query.id);
-    await Tasks.saveTasks(newTasks);
-    res.sendStatus(202);
+    try {
+        await Task.destroy({
+            where:{
+                uuid: req.query.id,
+            }
+        });
+        res.sendStatus(202);
+    } catch(err) {
+        res.status(400).send(err);
+    }
 })
 
 module.exports = router;

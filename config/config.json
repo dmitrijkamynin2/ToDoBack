@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "dmitrij",
+    "password": "user",
+    "database": "tasks",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "dmitrij",
+    "password": "user",
+    "database": "tasks",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "dmitrij",
+    "password": "user",
+    "database": "tasks",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
