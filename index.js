@@ -1,6 +1,8 @@
 const express = require('express');
 const config = require('./config.js');
 const app = express();
+const registRouter = require('./routes/regist.js');
+const loginRouter = require('./routes/login.js')
 var fs = require('fs');
 
 app.use(express.json());
@@ -11,6 +13,10 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
+
+
+app.use('/regist', registRouter);
+app.use('/login', loginRouter);
 
 const routes = fs.readdirSync('./routes/tasks');
 routes.forEach(route => {app.use('/api', require('./routes/tasks/'+route))});
