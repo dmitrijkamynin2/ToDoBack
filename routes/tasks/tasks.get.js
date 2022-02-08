@@ -2,6 +2,7 @@ const router = require('express').Router()
 const { query } = require('express-validator');
 const db = require('../../models/index.js');
 const checkError = require('../../checkErrorValidation/checkError.js');
+const jwt = require('jsonwebtoken');
 
 router.route('/tasks').get(
         query('filterBy').isIn(['all','done','undone']),
@@ -12,11 +13,14 @@ router.route('/tasks').get(
     async (req, res) => {
         try {
             const { filterBy, order, pp, page } = req.query;
+            const decoded = jwt.verify(req.headers.authorization, 'chereshnia');
+            const user_id = decoded.id;
             const filterByBoolean = (filterBy === 'all') ? [true, false] : (filterBy === 'done');
             const tasks = await db.Task.findAndCountAll(
                 {
                     where: {
                         done: filterByBoolean,
+                        user_id: user_id
                     },
                     order: [
                         ['createdAt', order],
