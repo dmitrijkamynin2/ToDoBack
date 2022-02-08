@@ -1,4 +1,4 @@
-const loginRouter = require('express').Router()
+const authRouter = require('express').Router()
 const db = require('../models/index.js');
 const jwt = require('jsonwebtoken');
 
@@ -19,8 +19,6 @@ loginRouter.route('/').post(
                 throw new Error('invalid password');
             }
             const token = jwt.sign(checkingUser.id, 'chereshnia');
-            checkingUser.token = token;
-            checkingUser.save();
             res.status(200).json(token);
         } catch(err) {
             res.status(404).json(err.message);

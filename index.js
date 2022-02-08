@@ -19,6 +19,7 @@ app.use(function (req, res, next) {
 app.use('/regist', registRouter);
 app.use('/login', loginRouter);
 
+
 const routes = fs.readdirSync('./routes/tasks');
 routes.forEach(route => {app.use('/api', require('./routes/tasks/'+route))});
 
