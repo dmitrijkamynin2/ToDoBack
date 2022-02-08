@@ -14,8 +14,6 @@ router.route('/tasks').get(
             const { filterBy, order, pp, page } = req.query;
             const filterByBoolean = (filterBy === 'all') ? [true, false] : (filterBy === 'done');
 
-            console.log(req.headers.authorization);
-
             const tasks = await db.Task.findAndCountAll(
                 {
                     where: {

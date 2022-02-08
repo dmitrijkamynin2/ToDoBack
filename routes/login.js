@@ -18,11 +18,13 @@ loginRouter.route('/').post(
             if (!checkingPassword) {
                 throw new Error('invalid password');
             }
-            const token = jwt.sign(checkingUser.id, 'chereshnia');
+            const token = jwt.sign({id: checkingUser.id}, 'chereshnia', {expiresIn: '20s'});
             checkingUser.token = token;
             checkingUser.save();
-            res.status(200).json(token);
+            console.log(token)
+            res.status(200).send(token);
         } catch(err) {
+            console.log(err);
             res.status(404).json(err.message);
         }
     }
