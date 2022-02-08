@@ -6,7 +6,6 @@ loginRouter.route('/').patch(
     async (req, res, next) => {
         try {
             const { name, password } = req.body;
-            console.log(name);
             const checkingUser = await db.User.findOne({
                 where: {
                     name: name,
