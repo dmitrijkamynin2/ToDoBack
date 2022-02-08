@@ -6,6 +6,7 @@ const loginRouter = require('./routes/login.js');
 const auth = require('./routes/auth.js')
 const cors = require('cors');
 var fs = require('fs');
+require('dotenv').config()
 
 app.use(express.json());
 // app.use(function (req, res, next) {
@@ -27,7 +28,7 @@ app.use('/api', auth);
 const routes = fs.readdirSync('./routes/tasks');
 routes.forEach(route => {app.use('/api', require('./routes/tasks/'+route))});
 
-const PORT = process.env.PORT || config.PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 console.log(`Server is listening port ${PORT}`) 
 })
