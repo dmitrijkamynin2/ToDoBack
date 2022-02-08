@@ -18,7 +18,7 @@ loginRouter.route('/').post(
             if (!checkingPassword) {
                 throw new Error('invalid password');
             }
-            const token = jwt.sign({id: checkingUser.id}, 'chereshnia', {expiresIn: '20s'});
+            const token = jwt.sign({id: checkingUser.id}, 'chereshnia', {expiresIn: '1h'});
             checkingUser.token = token;
             checkingUser.save();
             console.log(token)

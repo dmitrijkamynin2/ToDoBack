@@ -13,7 +13,6 @@ router.route('/tasks').get(
         try {
             const { filterBy, order, pp, page } = req.query;
             const filterByBoolean = (filterBy === 'all') ? [true, false] : (filterBy === 'done');
-
             const tasks = await db.Task.findAndCountAll(
                 {
                     where: {

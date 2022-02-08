@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     name: DataTypes.STRING,
-    done: DataTypes.BOOLEAN
+    done: DataTypes.BOOLEAN,
+    user_id: DataTypes.UUID,
   }, {
     sequelize,
     modelName: 'Task',
