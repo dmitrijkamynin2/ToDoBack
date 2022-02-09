@@ -2,6 +2,7 @@ const db = require('../models/index.js');
 const jwt = require('jsonwebtoken');
 
 module.exports = async (req, res, next) => {
+    //todo
         try {
             const decoded = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
             next();
