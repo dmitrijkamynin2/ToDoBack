@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "dmitrij",
-    "password": "user",
-    "database": "tasks",
-    "host": "localhost",
+    "username": "wkdxfwabfofvdr",
+    "password": "d93b8ed426cc34e1bbfb7154f981a521625010503ca3f37b384d6324e50bcaae",
+    "database": "d1utd1flo9n8b4",
+    "host": "ec2-3-223-39-179.compute-1.amazonaws.com",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
