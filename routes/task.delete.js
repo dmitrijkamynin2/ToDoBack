@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { query } = require('express-validator');
-const db = require('../../models/index.js');
-const checkError = require('../../checkErrorValidation/checkError.js');
+const db = require('../models/index.js');
+const checkError = require('../checkErrorValidation/checkError.js');
 const jwt = require('jsonwebtoken');
 
-router.route('/tasks').delete(
+router.route('/api/tasks').delete(
         query('uuid').isUUID(),
         checkError,
     async (req, res) => {

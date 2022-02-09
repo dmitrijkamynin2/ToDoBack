@@ -1,11 +1,11 @@
-const loginRouter = require('express').Router()
+const route = require('express').Router()
 const { body } = require('express-validator');
 const checkError = require('../checkErrorValidation/checkError.js');
 const db = require('../models/index.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-loginRouter.route('/').post(
+route.route('/login').post(
     body('name').isLength({ min: 1, max: 20}).withMessage('login must be between 1 and 20 characters'),
     body('password').isLength({ min: 6, max: 10}).withMessage('password must be between 6 and 10 characters'),
     checkError,
@@ -35,4 +35,4 @@ loginRouter.route('/').post(
     }
 )
 
-module.exports = loginRouter;
+module.exports = route;

@@ -1,11 +1,11 @@
 const router = require('express').Router();
 const { body } = require('express-validator');
-const db = require('../../models/index.js');
-const checkError = require('../../checkErrorValidation/checkError.js');
+const db = require('../models/index.js');
+const checkError = require('../checkErrorValidation/checkError.js');
 const { Op } = require("sequelize");
 const jwt = require('jsonwebtoken');
 
-router.route('/tasks').patch(
+router.route('/api/tasks').patch(
         body('name').isLength({ min: 1 }),
         body('done').isBoolean(),
         body('uuid').isUUID(),

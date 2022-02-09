@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { body } = require('express-validator');
-const db = require('../../models/index.js');
-const checkError = require('../../checkErrorValidation/checkError.js');
+const db = require('../models/index.js');
+const checkError = require('../checkErrorValidation/checkError.js');
 const jwt = require('jsonwebtoken');
 
-router.route('/tasks').post(
+router.route('/api/tasks').post(
         body('name').isLength({ min: 1 }),
         body('done').isBoolean(),
         checkError,

@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const { query } = require('express-validator');
-const db = require('../../models/index.js');
-const checkError = require('../../checkErrorValidation/checkError.js');
+const db = require('../models/index.js');
+const checkError = require('../checkErrorValidation/checkError.js');
 const jwt = require('jsonwebtoken');
 
-router.route('/tasks').get(
+router.route('/api/tasks').get(
         query('filterBy').isIn(['all','done','undone']),
         query('order').isIn(['asc','desc']),
         query('pp').isInt({ min: 5, max: 20 }).withMessage('should be between 5 and 20'),

@@ -1,10 +1,10 @@
-const registRouter = require('express').Router()
+const router = require('express').Router()
 const { body } = require('express-validator');
 const checkError = require('../checkErrorValidation/checkError.js');
 const db = require('../models/index.js');
 const bcrypt = require('bcryptjs');
 
-registRouter.route('/').post(
+router.route('/regist').post(
     body('name').isLength({ min: 1, max: 20}).withMessage('login must be between 1 and 20 characters'),
     body('password').isLength({ min: 6, max: 10}).withMessage('password must be between 6 and 10 characters'),
     checkError,
@@ -29,4 +29,4 @@ registRouter.route('/').post(
     }
 )
 
-module.exports = registRouter;
+module.exports = router;
