@@ -20,11 +20,14 @@ router.route('/regist').post(
                 throw new Error('there is already such a user');
             };
             const hashPassword = bcrypt.hashSync(password, 7);
-            console.log(hashPassword);
             const newUser = await db.User.create({name, password: hashPassword});
             res.status(200).send(newUser);
         } catch(err) {
-            res.status(404).json(err.message);
+            if (err.message === 'there is already such a user') {
+                res.status(422).send(err);
+            } else {
+                res.status(404).send(err);
+            }
         }
     }
 )
