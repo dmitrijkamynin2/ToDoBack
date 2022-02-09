@@ -10,7 +10,7 @@ router.route('/tasks').delete(
     async (req, res) => {
         try {
             const { uuid } = req.query;
-            const decoded = jwt.verify(req.headers.authorization, 'chereshnia');
+            const decoded = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
             const user_id = decoded.id;
             await db.Task.destroy({ where: { uuid, user_id } });
             res.sendStatus(202);

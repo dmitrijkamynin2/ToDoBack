@@ -11,7 +11,7 @@ router.route('/tasks').post(
     async (req, res) => {
         try{
             const {name, done} = req.body;
-            const decoded = jwt.verify(req.headers.authorization, 'chereshnia');
+            const decoded = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
             const user_id = decoded.id;
             console.log(user_id);
             // search for the same task

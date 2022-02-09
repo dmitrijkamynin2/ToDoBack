@@ -5,7 +5,6 @@ const loginRouter = require('./routes/login.js');
 const auth = require('./routes/auth.js')
 const cors = require('cors');
 const fs = require('fs');
-require('dotenv').config()
 
 app.use(express.json());
 app.use('*', cors());
