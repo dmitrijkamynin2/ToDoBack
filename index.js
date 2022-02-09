@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const registRouter = require('./routes/regist.js');
 const loginRouter = require('./routes/login.js');
-const auth = require('./routes/auth.js')
+const auth = require('./middleware/auth.js')
 const cors = require('cors');
 const fs = require('fs');
 

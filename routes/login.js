@@ -3,6 +3,7 @@ const { body } = require('express-validator');
 const checkError = require('../checkErrorValidation/checkError.js');
 const db = require('../models/index.js');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 loginRouter.route('/').post(
     body('name').isLength({ min: 1, max: 20}).withMessage('login must be between 1 and 20 characters'),
@@ -19,7 +20,9 @@ loginRouter.route('/').post(
             if (!checkingUser) {
                 throw new Error('not such user');
             }
-            const checkingPassword = (password === checkingUser.password);
+            console.log(password);
+            const checkingPassword = (bcrypt.compareSync(password, checkingUser.password));
+            console.log(checkingPassword);
             if (!checkingPassword) {
                 throw new Error('invalid password');
             }
