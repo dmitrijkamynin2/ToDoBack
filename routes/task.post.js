@@ -13,7 +13,6 @@ router.route('/api/tasks').post(
             const {name, done} = req.body;
             const decoded = jwt.verify(req.headers.authorization, process.env.SECRET_KEY);
             const user_id = decoded.id;
-            console.log(user_id);
             // search for the same task
             const oneTask = await db.Task.findOne({ where: { name, user_id } });
             if (oneTask) throw new Error('this task already exists');

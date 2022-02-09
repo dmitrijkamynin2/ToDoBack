@@ -20,9 +20,7 @@ route.route('/login').post(
             if (!checkingUser) {
                 throw new Error('not such user');
             }
-            console.log(password);
             const checkingPassword = (bcrypt.compareSync(password, checkingUser.password));
-            console.log(checkingPassword);
             if (!checkingPassword) {
                 throw new Error('invalid password');
             }
