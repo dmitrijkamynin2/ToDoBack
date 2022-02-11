@@ -24,12 +24,11 @@ router.route('/api/tasks').patch(
                 }
             });
             if (oneTask) throw new Error('this task already exists');
-
             await db.Task.update({name, done}, {where: {uuid, user_id}});
 
             res.sendStatus(202);
         } catch(err) {
-            res.status(401).send(err.name +': '+ err.message);
+            res.status(400).send(err.message);
         }
 })
 

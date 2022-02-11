@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
             next();
         } catch(err) {
             console.log(err.message);
-            if (err.message === 'jwt expired') {
+            if (err.message === 'jwt expired' || err.message === 'jwt malformed') {
                 res.sendStatus(401);
             } else {
                 res.status(404).json(err.message);
